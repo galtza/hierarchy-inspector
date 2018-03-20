@@ -56,6 +56,8 @@ using an_empty_typelist = typelist<>;
 
 Note: _in this article, we will be using extensively the type alias [**using**](http://en.cppreference.com/w/cpp/language/type_alias)._
 
+In this example, `all_types` and `an_empty_typelist` are new types that *hold* other types. Notice that in C++11 there are already types that *hold* other types, for instance `std::pair` and specially `std::tuple` that can be considered practically a *type list*.
+
 ### Our goal
 
 The kind of interface we are looking for is this:
