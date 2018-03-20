@@ -1,5 +1,5 @@
-#include <iostream>
 #include <iomanip>
+#include <stdio.h>
 
 namespace tmp {
 
@@ -128,7 +128,7 @@ struct hierarchy_iterator {
     inline static void exec(void* _p) {
         using target_t = typename pop_front<TL>::type;
         if (auto ptr = static_cast<target_t*>(_p)) {
-            std::cout << "base = " << typeid(typename at<TL, 0>::type).name() << "\n";
+            printf("base = %s\n", typeid(typename at<TL, 0>::type).name());
             hierarchy_iterator<target_t>::exec(_p);
         }
     }
@@ -162,30 +162,22 @@ class E : public C { };        class I : public H { };
 
 int main()
 {
-    using REGISTRY                = typelist<I, C, Z, G, D, F, L, C, I, A, T, B, J, K, H, E, E>;
-    using ANCESTORS_OF_D          = find_ancestors<REGISTRY, D>::type;
-    using ANCESTORS_OF_K          = find_ancestors<REGISTRY, K>::type;
-    using EXPECTED_ANCESTORS_OF_D = typelist<A, C, D>;
-    using EXPECTED_ANCESTORS_OF_K = typelist<F, H, J, I, K>;
+    using namespace std;
 
-    static_assert(std::is_same<ANCESTORS_OF_D, EXPECTED_ANCESTORS_OF_D>::value, "Ancestor of D test failed");
-    static_assert(std::is_same<ANCESTORS_OF_K, EXPECTED_ANCESTORS_OF_K>::value, "Ancestor of K test failed");
+    using REGISTRY    = typelist<I, C, Z, G, D, F, L, C, I, A, T, B, J, K, H, E, E>;
+    using D_ANCESTORS = find_ancestors<REGISTRY, D>::type;
+    using K_ANCESTORS = find_ancestors<REGISTRY, K>::type;
+    using D_EXPECTED = typelist<A, C, D>;
+    using K_EXPECTED = typelist<F, H, J, I, K>;
 
-    auto banner = [] {
-        std::cout << std::setfill('=') << std::setw(80) << "\n";
-    };
+    static_assert(is_same<D_ANCESTORS, D_EXPECTED>::value, "Ancestor of D test failed");
+    static_assert(is_same<K_ANCESTORS, K_EXPECTED>::value, "Ancestor of K test failed");
 
-    banner();
-
-    auto d_instance = D();
-    hierarchy_iterator<ANCESTORS_OF_D>::exec(&d_instance);
-
-    banner();
-
-    auto k_instance = K();
-    hierarchy_iterator<ANCESTORS_OF_K>::exec(&k_instance);
-
-    banner();
+    D d_instance;
+    hierarchy_iterator<D_ANCESTORS>::exec(&d_instance);
+    printf("\n\n");
+    K k_instance;
+    hierarchy_iterator<K_ANCESTORS>::exec(&k_instance);
 
     return 0;
 }
