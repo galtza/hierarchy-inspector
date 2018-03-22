@@ -8,6 +8,12 @@ namespace tmp {
     struct typelist {
     };
 
+    template<typename T>
+    struct is_typelist : std::false_type { };
+
+    template<typename...TS>
+    struct is_typelist<typelist<TS...>> : std::true_type { };
+
     // basic operations
     template<typename T, typename TL> struct push_back;
     template<typename T, typename TL> struct push_front;
@@ -109,6 +115,7 @@ namespace tmp {
 
     template<typename TL, typename T>
     struct find_ancestors {
+        static_assert(is_typelist<TL>::value, "The first parameter is not a typelist");
 
         template<typename U>
         using base_of_T = typename std::is_base_of<U, T>::type;
@@ -125,6 +132,7 @@ using namespace tmp;
 
 template<typename TL>
 struct hierarchy_iterator {
+    static_assert(is_typelist<TL>::value, "Not a typelist");
     inline static void exec(void* _p) {
         using target_t = typename pop_front<TL>::type;
         if (auto ptr = static_cast<target_t*>(_p)) {
