@@ -5,8 +5,9 @@
 namespace tmp {
 
     // type list
-    template<typename...>
+    template<typename...TS>
     struct typelist {
+        static constexpr auto size = sizeof...(TS);
     };
 
     template<typename T>
@@ -43,6 +44,7 @@ namespace tmp {
 
     template <typename T, typename...TS, size_t I>
     struct at<typelist<T, TS...>, I> {
+        static_assert(I < (1 + sizeof...(TS)), "Out of bounds access");
         using type = typename at<typelist<TS...>, I - 1>::type;
     };
 
