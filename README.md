@@ -445,3 +445,9 @@ As we can see, the compiler unrolls the recursive calls for ancestors of `D` (`t
   * [Type alias](http://en.cppreference.com/w/cpp/language/type_alias)
   * [std::conditional](http://en.cppreference.com/w/cpp/types/conditional)
   * [std::is_base_of](http://en.cppreference.com/w/cpp/types/is_base_of)
+  
+#### About this document
+
+March 28, 2018 &mdash; Raul Ramos
+
+[LICENSE](https://github.com/galtza/hierarchy-inspector/blob/master/LICENSE)
