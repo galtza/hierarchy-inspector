@@ -437,7 +437,7 @@ As we can see, the compiler unrolls the recursive calls for ancestors of `D` (`t
 
 ### Further reading
 
-* [Global type list creation](https://github.com/galtza/global-typelist):
+* [How to build and maintain a global type-list](https://github.com/galtza/global-typelist):
   In this article it is discussed the techniques to allow compile-time events to build and maintain a globally defined type list.
 
 * References:
