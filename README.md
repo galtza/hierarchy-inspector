@@ -437,8 +437,8 @@ As we can see, the compiler unrolls the recursive calls for ancestors of `D` (`t
 
 ### Further reading
 
-* Comming soon:
-  "*How to retrieve a global type list from a series of class registrations*", where we will be discussing the techniques to link class registration events with a globally accessible type list.
+* [Global type list creation](https://github.com/galtza/global-typelist):
+  In this article it is discussed the techniques to allow compile-time events to build and maintain a globally defined type list.
 
 * References:
   * [Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming)
