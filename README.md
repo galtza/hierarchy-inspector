@@ -82,7 +82,7 @@ namespace tmp {
 
 In this particular example, we want a different implementation when the first type is just `int` regardless of the rest. We are going to take advantage of this feature during the whole article.
 
-In the standard library we can find types that *hold* other types, for instance `std::tupl`, which can be considered practically a *type list*.
+In the standard library we can find types that *hold* other types, for instance `std::tuple`, which can be considered practically a *type list*.
 
 ## Our goal
 
