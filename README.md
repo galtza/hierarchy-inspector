@@ -1,6 +1,6 @@
 > Level Intermediate
 # Inspect a type hierarchy at compile-time
-Most of C++ programmers know something about **metaprogramming**. Some hate it, some love it, some fear it, but probably most of us just do not know enough. Like any other tool, metaprogramming can be either a benefit or a hazard, we just have to choose wisely the right tools for the right problems.
+Most C++ programmers know something about **metaprogramming**. Some hate it, some love it, some fear it, but probably most of us just do not know enough. Like any other tool, metaprogramming can be either a benefit or a hazard, we just have to choose wisely the right tools for the right problems.
 
 This article is a brief introduction to metaprogramming focused on a real-world example. Essentially, we will learn how to represent and manipulate lists of types, by using some well known c++ features like variadic templates.
 
