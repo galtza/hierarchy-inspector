@@ -374,7 +374,7 @@ struct hierarchy_iterator {
     inline static void exec(void* _p) {
         using target_t = typename pop_front<TL>::type;
         if (auto ptr = static_cast<target_t*>(_p)) {
-            printf("base = %s\n", typeid(typename at<TL, 0>::type).name());
+            printf("%s\n", typeid(typename at<TL, 0>::type).name());
             hierarchy_iterator<target_t>::exec(_p);
         }
     }
