@@ -4,13 +4,13 @@ Most C++ programmers know something about **metaprogramming**. Some hate it, som
 
 This article is a brief introduction to metaprogramming focused on a real-world example. Essentially, we will learn how to represent and manipulate lists of types, by using some well known c++ features like variadic templates.
 
-However, It **is not** intended to be a comprehensive description of C++11 or metaprogramming, **it is just about overcoming the fear of metaprogramming**, so you can still hate it, love it or keep on fearing it, but with a bit more of knowledge.
+However, It **is not** intended to be a comprehensive description of C++11 or metaprogramming, **it is just about overcoming the fear of metaprogramming**, so you can still hate it, love it or keep on fearing it, but with a bit more knowledge.
 
 Our problem can be formulated as:
 
 > Given a list of arbitrary types TL and an arbitrary type T, build a template meta-function that computes an ordered list of ancestors of T included in TL. Also, create a function that iterates over the types, performing an arbitrary operation.
 
-One of the usages of this technique is **serialization**. By having access to the list of ordered ancestors, we can have access to all the members in a parent-to-child order. In addition, all of this **without having to alter the original code**.
+One of the usages of this technique is **serialization**. By having access to the list of ordered ancestors, we can have access to all the members in a parent-to-child order. In addition, all of this is **without having to alter the original code**.
 
 Throughout the article, we will be using the following two class hierarchies *registered* in a particular order:
 
@@ -82,7 +82,7 @@ namespace tmp {
 
 In this particular example, we want a different implementation when the first type is just `int` regardless of the rest. We are going to take advantage of this feature during the whole article.
 
-In the standard library we can find types that *hold* other types, for instance `std::tuple`, which can be considered practically a *type list*.
+In the standard library, we can find types that *hold* other types, for instance, `std::tuple`, which can be considered practically a *type list*.
 
 ## Our goal
 
@@ -109,7 +109,7 @@ The call to `hierarchy_iterator` will make to recursively call the same for each
 
 ## Simple operations
 
-In order to achieve our goal we will need a few simple operations, like adding types, removing types and accessing types by index. Specifically, we need to implement the following meta-functions: ***push_back***, ***push_front***, ***pop_front*** and ***at***. 
+In order to achieve our goal, we will need a few simple operations, like adding types, removing types and accessing types by index. Specifically, we need to implement the following meta-functions: ***push_back***, ***push_front***, ***pop_front*** and ***at***. 
 
 The meta-function ***push_back*** is as follows:
 
@@ -122,7 +122,7 @@ namespace tmp {
 }
 ```
 
-We need to specialize for *type lists*:
+We need an specialization for *type lists*:
 
 ```cpp
 namespace tmp {
@@ -172,7 +172,7 @@ namespace tmp {
 }
 ```
 
-This time, we need two specializations, one for the base case (index == 0), which will be the most specialized one, and other for the general case (index != 0)
+This time, we need two specializations, one for the base case (index == 0), which will be the most specialized one, and another for the general case (index != 0)
 
 ```cpp
 namespace tmp {
@@ -346,7 +346,7 @@ namespace tmp {
 
 Again, the base case is straightforward: if it receives an empty *type list* as source, `type` is the destination list without any modification.
 
-In the general case, there are a few preliminary computations and definitions. Firstly, a unary predicate that forms the negation of a type trait (`negation`) (*defined in the standard library starting from C++17*). Secondly, a binary predicate that is used to generate a type alias with the most ancient type (`cmp` and `most_ancient` respectively). And finally, a unary predicate that given a type `T` evaluates to true if it is not the most ancient type (`not_most_ancient`).
+In the general case, there are a few preliminary computations and definitions. Firstly, a unary predicate that forms the negation of a type trait (`negation`) (*defined in the standard library starting from C++17*). Secondly, a binary predicate is used to generate a type alias with the most ancient type (`cmp` and `most_ancient` respectively). And finally, a unary predicate that given a type `T` evaluates to true if it is not the most ancient type (`not_most_ancient`).
 
 With all this, `impl::find_ancestor` behaviour can be described in a few sentences:
 
